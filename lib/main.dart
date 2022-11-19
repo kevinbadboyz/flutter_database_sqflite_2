@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
           context: context,
           elevation: 5,
           builder: (_) => Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             width: double.infinity,
             height: 600,
             child: SingleChildScrollView(
@@ -132,7 +132,7 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Cancel'),
+                        child: const Text('Cancel'),
                       )
                     ],
                   )
@@ -142,20 +142,20 @@ class _MyAppState extends State<MyApp> {
           ));
     }
 
-    void _deleteEmployee(int id) {
+    void _deleteEmployee(int id, String name) {
       showDialog(context: context, builder: (context){
         return AlertDialog(
-          title: const Text('Informasi'),
-          content: Text('Menghapus data dengan id $id ini?'),
+          title: const Text('Information'),
+          content: Text('Delete data $name?'),
           actions: [
             ElevatedButton(onPressed: () async {
               await DatabaseHelper().deleteEmployee(id);
               refreshEmployee();
               Navigator.pop(context);
-            }, child: const Text('Ya')),
+            }, child: const Text('Yes')),
             OutlinedButton(onPressed: (){
               Navigator.pop(context);
-            }, child: const Text('Tidak')),
+            }, child: const Text('No')),
           ],
         );
       });
@@ -193,7 +193,7 @@ class _MyAppState extends State<MyApp> {
                                 icon: const Icon(Icons.edit)),
                             IconButton(
                                 onPressed: () =>
-                                    _deleteEmployee(listEmployee[index]['id']),
+                                    _deleteEmployee(listEmployee[index]['id'], listEmployee[index]['name']),
                                 icon: const Icon(Icons.delete))
                           ],
                         ),
