@@ -49,7 +49,6 @@ class DatabaseHelper{
   }
 
   Future<List<Employee>> getAllEmployeeII() async{
-    // halloooo......
     final database = await init();
     final List<Map<String, dynamic>> maps = await database.query(_tableName);
     return maps.map((e) => Employee.fromMap(e)).toList();
